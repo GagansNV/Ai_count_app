@@ -190,6 +190,8 @@ def run():
 				endX = int(pos.right())
 				endY = int(pos.bottom())
 
+			
+
 				# add the bounding box coordinates to the rectangles list
 				rects.append((startX, startY, endX, endY))
 
@@ -220,7 +222,7 @@ def run():
 				# the difference between the y-coordinate of the *current*
 				# centroid and the mean of *previous* centroids will tell
 				# us in which direction the object is moving (negative for
-				# 'up' and positive for 'down')
+				# 'up' and positive for 'down')	
 				y = [c[1] for c in to.centroids]
 				direction = centroid[1] - np.mean(y)
 				to.centroids.append(centroid)
@@ -255,9 +257,12 @@ def run():
 						
 					x = []
 					# compute the sum of total people inside
-					x.append(len(empty1)-len(empty))
-					#print("Total people inside:", x)
-
+					x.append(len(empty)-len(empty1))
+					print("Total people inside:", x)
+					j=(x.pop())
+					mycursor=mydb.cursor()
+					sql = mycursor.execute("INSERT INTO pcount(Lcount) VALUES (%s)"%(j))
+					mydb.commit()
 
 			# store the trackable object in our dictionary
 			trackableObjects[objectID] = to
@@ -271,8 +276,8 @@ def run():
 
 		# construct a tuple of information we will be displaying on the
 		info = [
-		("Exit", totalUp),
-		("Enter", totalDown),
+		("Exit",  totalDown),
+		("Enter", totalUp ),
 		("Status", status),
 		]
 		
@@ -282,17 +287,15 @@ def run():
 	
 		
 		test=[]
-		j=0
 		
-		for i in x:
-			test.append(i)
-		for i in test:
-			j=i
-			print(j)
-		mycursor=mydb.cursor()
+		# j=test.pop()
+		# print(j)
+		
+		
+			# print(j)
+		
 		# delsql=mycursor.execute("DELETE FROM pcount")
-		sql = mycursor.execute("INSERT INTO pcount(count) VALUES (%s)"%(j))
-		mydb.commit()
+		
 		# mycursor=mydb.cursor()
 		# mycursor.execute("Select * FROM pcount")
 		# myresult = mycursor.fetchone()

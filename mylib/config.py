@@ -5,7 +5,9 @@
 # e.g., 'email@gmail.com'
 MAIL = ''
 # Enter the ip camera url (e.g., url = 'http://191.138.0.100:8040/video')
-url = 'http://10.10.0.25:6677/videofeed?username=BIFCEECN&password='
+# url = 'http://10.10.0.25:6677/videofeed?username=BIFCEECN&password='
+url = 'rtsp://10.10.0.91/live/ch00_0'
+
 
 # ON/OFF for mail feature. Enter True to turn on the email alert feature.
 ALERT = False
